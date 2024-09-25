@@ -1,6 +1,6 @@
-Question Link: [1683. Invalid Tweets](https://leetcode.com/problems/invalid-tweets/?envType=study-plan-v2&envId=top-sql-50
-Table: Tweets)
+Question Link: [1683. Invalid Tweets](https://leetcode.com/problems/invalid-tweets/?envType=study-plan-v2&envId=top-sql-50)
 
+Table: Tweets
 ```
 +----------------+---------+
 | Column Name    | Type    |
