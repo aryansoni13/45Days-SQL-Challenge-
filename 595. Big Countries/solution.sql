@@ -1,3 +1,3 @@
 # Write your MySQL query statement below
-SELECT product_id FROM Products WHERE 
-low_fats = 'Y' AND recyclable = 'Y' 
+SELECT name, population, area FROM World 
+WHERE area >= 3000000 OR population >= 25000000 

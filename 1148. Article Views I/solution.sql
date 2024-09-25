@@ -1,3 +1,3 @@
 # Write your MySQL query statement below
-SELECT product_id FROM Products WHERE 
-low_fats = 'Y' AND recyclable = 'Y' 
+SELECT distinct author_id as id FROM Views 
+WHERE author_id = viewer_id ORDER BY id 
