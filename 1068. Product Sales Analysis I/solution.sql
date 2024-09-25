@@ -1,3 +1,3 @@
 # Write your MySQL query statement below
-SELECT product_id FROM Products WHERE 
-low_fats = 'Y' AND recyclable = 'Y' 
+SELECT Product.product_name, Sales.year, Sales.price FROM Sales
+JOIN Product ON Sales.product_id = Product.product_id 

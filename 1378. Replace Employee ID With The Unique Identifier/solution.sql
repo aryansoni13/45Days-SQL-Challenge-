@@ -1,3 +1,3 @@
 # Write your MySQL query statement below
-SELECT product_id FROM Products WHERE 
-low_fats = 'Y' AND recyclable = 'Y' 
+SELECT EmployeeUNI.unique_id, Employees.name FROM Employees
+LEFT JOIN EmployeeUNI ON Employees.id = EmployeeUNI.id
