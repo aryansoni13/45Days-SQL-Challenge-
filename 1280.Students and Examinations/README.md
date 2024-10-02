@@ -1,35 +1,23 @@
-Question Link: [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/description/?envType=study-plan-v2&envId=top-sql-50)
+Question Link: [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/?envType=study-plan-v2&envId=top-sql-50)
 
 Table: Employee
 ```
 +-------------+---------+
 | Column Name | Type    |
 +-------------+---------+
-| empId       | int     |
+| id          | int     |
 | name        | varchar |
-| supervisor  | int     |
-| salary      | int     |
+| department  | varchar |
+| managerId   | int     |
 +-------------+---------+
 ```
-empId is the column with unique values for this table.
-Each row of this table indicates the name and the ID of an employee in addition to their salary and the id of their manager.
+id is the primary key (column with unique values) for this table.
+Each row of this table indicates the name of an employee, their department, and the id of their manager.
+If managerId is null, then the employee does not have a manager.
+No employee will be the manager of themself.
  
 
-Table: Bonus
-```
-+-------------+------+
-| Column Name | Type |
-+-------------+------+
-| empId       | int  |
-| bonus       | int  |
-+-------------+------+
-```
-empId is the column of unique values for this table.
-empId is a foreign key (reference column) to empId from the Employee table.
-Each row of this table contains the id of an employee and their respective bonus.
- 
-
-Write a solution to report the name and bonus amount of each employee with a bonus less than 1000.
+Write a solution to find managers with at least five direct reports.
 
 Return the result table in any order.
 
@@ -42,31 +30,22 @@ Example 1:
 Input: 
 Employee table:
 ```
-+-------+--------+------------+--------+
-| empId | name   | supervisor | salary |
-+-------+--------+------------+--------+
-| 3     | Brad   | null       | 4000   |
-| 1     | John   | 3          | 1000   |
-| 2     | Dan    | 3          | 2000   |
-| 4     | Thomas | 3          | 4000   |
-+-------+--------+------------+--------+
-```
-Bonus table:
-```
-+-------+-------+
-| empId | bonus |
-+-------+-------+
-| 2     | 500   |
-| 4     | 2000  |
-+-------+-------+
++-----+-------+------------+-----------+
+| id  | name  | department | managerId |
++-----+-------+------------+-----------+
+| 101 | John  | A          | null      |
+| 102 | Dan   | A          | 101       |
+| 103 | James | A          | 101       |
+| 104 | Amy   | A          | 101       |
+| 105 | Anne  | A          | 101       |
+| 106 | Ron   | B          | 101       |
++-----+-------+------------+-----------+
 ```
 Output: 
 ```
-+------+-------+
-| name | bonus |
-+------+-------+
-| Brad | null  |
-| John | null  |
-| Dan  | 500   |
-+------+-------+
++------+
+| name |
++------+
+| John |
++------+
 ```
