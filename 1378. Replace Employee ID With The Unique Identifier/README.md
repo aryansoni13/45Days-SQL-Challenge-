@@ -1,33 +1,46 @@
 Question Link: [1378. Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/?envType=study-plan-v2&envId=top-sql-50)
-Table: Employees
+Table: Students
 ```
 +---------------+---------+
 | Column Name   | Type    |
 +---------------+---------+
-| id            | int     |
-| name          | varchar |
+| student_id    | int     |
+| student_name  | varchar |
 +---------------+---------+
 ```
-id is the primary key (column with unique values) for this table.
-Each row of this table contains the id and the name of an employee in a company.
+student_id is the primary key (column with unique values) for this table.
+Each row of this table contains the ID and the name of one student in the school.
  
 
-Table: EmployeeUNI
+Table: Subjects
 ```
-+---------------+---------+
-| Column Name   | Type    |
-+---------------+---------+
-| id            | int     |
-| unique_id     | int     |
-+---------------+---------+
++--------------+---------+
+| Column Name  | Type    |
++--------------+---------+
+| subject_name | varchar |
++--------------+---------+
 ```
-(id, unique_id) is the primary key (combination of columns with unique values) for this table.
-Each row of this table contains the id and the corresponding unique id of an employee in the company.
+subject_name is the primary key (column with unique values) for this table.
+Each row of this table contains the name of one subject in the school.
  
 
-Write a solution to show the unique ID of each user, If a user does not have a unique ID replace just show null.
+Table: Examinations
+```
++--------------+---------+
+| Column Name  | Type    |
++--------------+---------+
+| student_id   | int     |
+| subject_name | varchar |
++--------------+---------+
+```
+There is no primary key (column with unique values) for this table. It may contain duplicates.
+Each student from the Students table takes every course from the Subjects table.
+Each row of this table indicates that a student with ID student_id attended the exam of subject_name.
+ 
 
-Return the result table in any order.
+Write a solution to find the number of times each student attended each exam.
+
+Return the result table ordered by student_id and subject_name.
 
 The result format is in the following example.
 
@@ -36,42 +49,67 @@ The result format is in the following example.
 Example 1:
 
 Input: 
-Employees table:
+Students table:
 ```
-+----+----------+
-| id | name     |
-+----+----------+
-| 1  | Alice    |
-| 7  | Bob      |
-| 11 | Meir     |
-| 90 | Winston  |
-| 3  | Jonathan |
-+----+----------+
++------------+--------------+
+| student_id | student_name |
++------------+--------------+
+| 1          | Alice        |
+| 2          | Bob          |
+| 13         | John         |
+| 6          | Alex         |
++------------+--------------+
 ```
-EmployeeUNI table:
+Subjects table:
 ```
-+----+-----------+
-| id | unique_id |
-+----+-----------+
-| 3  | 1         |
-| 11 | 2         |
-| 90 | 3         |
-+----+-----------+
++--------------+
+| subject_name |
++--------------+
+| Math         |
+| Physics      |
+| Programming  |
++--------------+
+```
+Examinations table:
+```
++------------+--------------+
+| student_id | subject_name |
++------------+--------------+
+| 1          | Math         |
+| 1          | Physics      |
+| 1          | Programming  |
+| 2          | Programming  |
+| 1          | Physics      |
+| 1          | Math         |
+| 13         | Math         |
+| 13         | Programming  |
+| 13         | Physics      |
+| 2          | Math         |
+| 1          | Math         |
++------------+--------------+
 ```
 Output: 
 ```
-+-----------+----------+
-| unique_id | name     |
-+-----------+----------+
-| null      | Alice    |
-| null      | Bob      |
-| 2         | Meir     |
-| 3         | Winston  |
-| 1         | Jonathan |
-+-----------+----------+
++------------+--------------+--------------+----------------+
+| student_id | student_name | subject_name | attended_exams |
++------------+--------------+--------------+----------------+
+| 1          | Alice        | Math         | 3              |
+| 1          | Alice        | Physics      | 2              |
+| 1          | Alice        | Programming  | 1              |
+| 2          | Bob          | Math         | 1              |
+| 2          | Bob          | Physics      | 0              |
+| 2          | Bob          | Programming  | 1              |
+| 6          | Alex         | Math         | 0              |
+| 6          | Alex         | Physics      | 0              |
+| 6          | Alex         | Programming  | 0              |
+| 13         | John         | Math         | 1              |
+| 13         | John         | Physics      | 1              |
+| 13         | John         | Programming  | 1              |
++------------+--------------+--------------+----------------+
 ```
 Explanation: 
-Alice and Bob do not have a unique ID, We will show null instead.
-The unique ID of Meir is 2.
-The unique ID of Winston is 3.
-The unique ID of Jonathan is 1.
+The result table should contain all students and all subjects.
+Alice attended the Math exam 3 times, the Physics exam 2 times, and the Programming exam 1 time.
+Bob attended the Math exam 1 time, the Programming exam 1 time, and did not attend the Physics exam.
+Alex did not attend any exams.
+John attended the Math exam 1 time, the Physics exam 1 time, and the Programming exam 1 time.
